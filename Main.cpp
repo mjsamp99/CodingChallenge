@@ -137,7 +137,6 @@ int main()
         }
 
         cout << "There are " << word.size() << " letters in the word \n\n";
-        cout << "DEBUGG: " << word << endl;
 
         while (!gameOver)
         {
