@@ -1,2 +1,2 @@
 # CodingChallenge
- The coding challenge for application to studing soding job
+ The coding challenge for application to student coding job
