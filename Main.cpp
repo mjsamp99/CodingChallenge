@@ -44,7 +44,7 @@ void PrintFalse(vector<char> lettersGuessed)
     cout << "Bad guesses: ";
     for (int i = 0; i < lettersGuessed.size(); i++)
     {
-        cout << lettersGuessed.at(i);
+        cout << lettersGuessed.at(i) << " ";
     }
     cout << endl;
 }
@@ -59,6 +59,38 @@ bool CheckGameOver(vector<char> lettersFound)
         }
     }
     return true;
+}
+
+void Draw(int badGuesses)
+{
+    cout << endl;
+    switch (badGuesses)
+    {
+    case 0:
+        cout << "  +---+\n  |   |\n      |\n      |\n      |\n      |\n=========" << endl;
+        break;
+    case 1:
+        cout << "  +---+\n  |   |\n  O   |\n      |\n      |\n      |\n=========" << endl;
+        break;
+    case 2:
+        cout << "  +---+\n  |   |\n  O   |\n  |   |\n      |\n      |\n=========" << endl;
+        break;
+    case 3:
+        cout << "  +---+\n  |   |\n  O   |\n /|   |\n      |\n      |\n=========" << endl;
+        break;
+    case 4:
+        cout << "  +---+\n  |   |\n  O   |\n /|\\  |\n      |\n      |\n=========" << endl;
+        break;
+    case 5:
+        cout << "  +---+\n  |   |\n  O   |\n /|\\  |\n /    |\n      |\n=========" << endl;
+        break;
+    case 6:
+        cout << "  +---+\n  |   |\n  O   |\n /|\\  |\n / \\  |\n      |\n=========" << endl;
+        break;
+    default:
+        cout << "  +---+\n  |   |\n      |\n      |\n      |\n      |\n=========" << endl;
+        break;
+    }
 }
 
 int main()
@@ -108,25 +140,35 @@ int main()
 
         while (!gameOver)
         {
-            //system("CLS");
+            Draw(guessTypes[1]);
             cout << "Guesses made: " << guessTypes[0] + guessTypes[1] << "\nGood guesses: " << guessTypes[0] << "\tBad guesses: " << guessTypes[1] << "\n\n";
             guessTrue = Guess(letters, lettersFound, lettersGuessed, guessTypes);
             if (guessTrue)
             {
-
                 PrintCorrect(lettersFound);
-                if (CheckGameOver(lettersFound))
-                {
-                    cout << "You have correctly guessed the word! \nIt took you " << guessTypes[0] << " guesses \n\nWould you like to try again?" << endl;
-                    cout << "Type yes to play again or quit to quit" << endl;
-                    cin >> tryAgain;
-
-                    gameOver = true;
-                }
             }
             else
             {
                 PrintFalse(lettersGuessed);
+            }
+
+            if (guessTypes[1] >= 6 || CheckGameOver(lettersFound))
+            {
+                if (CheckGameOver(lettersFound))
+                {
+                    cout << "You have correctly guessed the word! \nIt took you " << guessTypes[0] << " guesses ";
+                }
+                else
+                {
+                    cout << "You ran out of guesses";
+                }
+                cout << "\n\nWould you like to try again?\nType yes to play again or quit to quit" << endl;
+                cin >> tryAgain;
+                if (tryAgain == "quit")
+                {
+                    cout << "Thank you for playing!";
+                }
+                gameOver = true;
             }
         }
     }
