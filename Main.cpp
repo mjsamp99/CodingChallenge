@@ -9,11 +9,12 @@ bool Guess(vector<char> &letters, vector<char> &lettersFound, vector<char> &lett
     char letter = ' ';
     cout << "Please guess a letter" << endl;
     cin >> letter;
+    letter = tolower(letter);
 
     system("CLS");
     for (int i = 0; i < letters.size(); i++)
     {
-        if (letter == letters.at(i))
+        if (letter == letters.at(i) || tolower(letter) == letters.at(i) || toupper(letter) == letters.at(i))
         {
             lettersFound.at(i) = letters.at(i);
             letters.at(i) = ' ';
